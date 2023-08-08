@@ -18,7 +18,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={roboto.className}>{children}</body>
+      <body
+        className={`
+          ${roboto.className}
+          bg-background
+          text-textLight
+          w-full
+          m-auto
+          md:max-w-7xl
+        `}
+      >
+        <section className="bg-primary mt-5">
+          {children}
+        </section>
+      </body>
     </html>
   );
 }
