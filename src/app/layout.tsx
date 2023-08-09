@@ -27,11 +27,11 @@ export default function RootLayout({
           text-textLight
           w-full
           m-auto
-          md:max-w-7xl
+          md:max-w-screen-2xl
         `}
       >
         <Header />
-        <section className="bg-primary md:mt-4 rounded">
+        <section className="bg-primary  rounded h-[85vh] overflow-y-scroll">
           {children}
         </section>
       </body>
