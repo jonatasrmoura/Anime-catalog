@@ -28,7 +28,7 @@ export default function RootLayout({
           md:max-w-7xl
         `}
       >
-        <section className="bg-primary mt-5">
+        <section className="bg-primary mt-6 rounded">
           {children}
         </section>
       </body>

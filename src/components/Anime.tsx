@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface IAnimeProps {
   name: string;
@@ -8,11 +9,14 @@ interface IAnimeProps {
 
 export function Anime({ name, description, image }: IAnimeProps) {
   return (
-    <div className="border border-black rounded">
+    <Link 
+      href={''}
+      className="border border-black rounded shadow-md"
+    >
       <Image
         src={image}
-        alt="teste"
-        width={360}
+        alt={name}
+        width={1000}
         height={150}
         unoptimized
       />
@@ -30,6 +34,6 @@ export function Anime({ name, description, image }: IAnimeProps) {
         <h4>{name}</h4>
         <p>{description}</p>
       </div>
-    </div>
+    </Link>
   );
 }
