@@ -3,9 +3,9 @@ import React, { useMemo } from "react";
 import * as Dialog from '@radix-ui/react-dialog';
 import Image from "next/image";
 
-import { Search } from "../Search";
+import { Search } from "./Search";
 import { lolisPhoto } from "@/utils/lolisPhoto";
-import { SignIn } from "../modal/SignIn";
+import { SignIn } from "./modal/SignIn";
 
 
 export function Header() {
