@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 
 import { Header } from '@/components/Header';
@@ -25,13 +25,12 @@ export default function RootLayout({
           ${roboto.className}
           bg-background
           text-textLight
-          w-full
           m-auto
-          md:max-w-screen-2xl
+          max-w-screen-2xl
         `}
       >
         <Header />
-        <section className="bg-primary  rounded h-[85vh] overflow-y-scroll">
+        <section className="bg-primary rounded h-[85vh] overflow-y-scroll">
           {children}
         </section>
       </body>

@@ -12,6 +12,7 @@ export function Search() {
           type="text"
           id="voice-search"
           className="
+            h-12
             bg-gray-50 
             border 
             border-gray-300 
@@ -20,7 +21,7 @@ export function Search() {
             rounded-lg 
             focus:ring-blue-500 
             focus:border-blue-500 
-            block w-full 
+            block w-full
             pl-10 
             p-2.5  
             dark:bg-gray-700 
