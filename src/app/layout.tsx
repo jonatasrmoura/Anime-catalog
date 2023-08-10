@@ -26,7 +26,7 @@ export default function RootLayout({
           bg-background
           text-textLight
           m-auto
-          max-w-screen-2xl
+          px-6
         `}
       >
         <Header />
