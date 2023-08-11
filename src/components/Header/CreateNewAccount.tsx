@@ -82,6 +82,7 @@ export function CreateNewAccount({ handleSignIn }: ICreateNewAccountProps) {
 
         <div className="mt-4 flex flex-col gap-4">
           <button
+            type="button"
             className="text-info w-40 font-semibold transition-opacity hover:opacity-60"
             onClick={() => handleSignIn('SignIn')}
           >

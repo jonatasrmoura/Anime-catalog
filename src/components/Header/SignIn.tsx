@@ -53,13 +53,13 @@ export function SignIn({ handleNewAccount }: ISignInProps) {
         />
 
         <div className="mt-4 flex flex-col gap-4">
-          <Link
+          <button
+            type="button"
             className="text-info w-32 font-semibold transition-opacity hover:opacity-60"
-            href={''}
             onClick={() => handleNewAccount('CreateNewAccount')}
           >
             Criar nova conta
-          </Link>
+          </button>
         </div>
 
         <footer className='mt-4 flex justify-end gap-4'>
