@@ -15,14 +15,16 @@ export function CreateAdModal({ title, icon, children }: CreateAdModalProps) {
       <Dialog.Content className="
         fixed
         bg-background text-textLight
-        py-8 px-10
+        py-8
+        px-2
         border border-info
         top-1/2 left-1/2 
         -translate-x-1/2 -translate-y-1/2
         rounded-lg
-        w-[500px]
+        w-[95%]
+        md:px-10
+        md:w-[500px]
         shadow-lg shadow-black/25
-        z-20
       ">
         <Dialog.Title className="text-3xl text-white font-black">
           <div className="flex items-center gap-2">

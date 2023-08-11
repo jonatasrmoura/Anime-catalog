@@ -1,14 +1,18 @@
 "use client";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import * as Dialog from '@radix-ui/react-dialog';
 import Image from "next/image";
 
-import { Search } from "./Search";
+import { Search } from "../Search";
 import { lolisPhoto } from "@/utils/lolisPhoto";
-import { SignIn } from "./modal/SignIn";
+import { SignIn } from "./SignIn";
+import { CreateNewAccount } from "./CreateNewAccount";
 
+export type IChooseHeaderModal = 'SignIn' | 'CreateNewAccount';
 
 export function Header() {
+  const [chooseHeaderModal, setChooseHeaderModal] = useState<IChooseHeaderModal>('SignIn');
+
   const profilePhoto = useMemo(() => {
     const indice = Math.floor(Math.random() * lolisPhoto.length);
     return lolisPhoto[indice];
@@ -34,8 +38,12 @@ export function Header() {
           />
           <span className='text-lg font-semibold'>Visitante</span>
         </Dialog.Trigger>
-          
-        <SignIn />
+
+        {chooseHeaderModal === 'SignIn' ? (
+          <SignIn handleNewAccount={setChooseHeaderModal} />
+        ) : (
+          <CreateNewAccount handleSignIn={setChooseHeaderModal} />
+        )}
       </Dialog.Root>
       
       <div className="m-auto w-[75%] md:m-0 md:w-1/3">

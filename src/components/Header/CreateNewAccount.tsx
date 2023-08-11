@@ -1,39 +1,59 @@
-import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Dialog from "@radix-ui/react-dialog";
-import { PiSignInBold } from "react-icons/pi";
+import { RiAccountPinCircleLine } from "react-icons/ri";
 
-import { CreateAdModal } from '../CreateAdModal';
 import { Input } from "../Input";
 import { Button } from "../Button";
+import { CreateAdModal } from "../CreateAdModal";
 
-import { ISignInSchema, signInSchema } from '../../validations/signInSchema';
+import { IChooseHeaderModal } from "./index";
 
-export function SignIn() {
+import {
+  ICreateNewAccountSchema,
+  createNewAccountSchema
+} from "@/validations/CreateNewAccountSchema";
+
+
+interface ICreateNewAccountProps {
+  handleSignIn: (value: IChooseHeaderModal) => void;
+}
+
+export function CreateNewAccount({ handleSignIn }: ICreateNewAccountProps) {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting }
-  } = useForm<ISignInSchema>({
-    resolver: yupResolver(signInSchema),
+  } = useForm<ICreateNewAccountSchema>({
+    resolver: yupResolver(createNewAccountSchema),
   });
 
-  const handleSignIn: SubmitHandler<ISignInSchema> = async (values) => {
+  const handleCreateNewAccount: SubmitHandler<ICreateNewAccountSchema> = async (values) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     console.log(values);
     reset();
   }
-  
+
   return (
-    <CreateAdModal title='Entrar' icon={<PiSignInBold />}>
-      <form onSubmit={handleSubmit(handleSignIn, (err) => console.log(err))}>
+    <CreateAdModal title='Criar nova conta' icon={<RiAccountPinCircleLine />}>
+      <form onSubmit={handleSubmit(handleCreateNewAccount, (err) => console.log(err))}>
+        <Input
+          label="Nome completo"
+          placeholder="Digite seu nome completo"
+          {...register('fullname')}
+          error={errors.fullname}
+        />
+        <Input
+          label="Apellido"
+          placeholder="Digite seu apellido"
+          {...register('surname')}
+          error={errors.surname}
+        />
         <Input
           label="E-mail"
           type="email"
           placeholder="Digite seu e-mail"
-          
           {...register('email')}
           error={errors.email}
         />
@@ -41,18 +61,24 @@ export function SignIn() {
           label="Senha"
           type="password"
           placeholder="Digite sua senha"
-          
           {...register('password')}
           error={errors.password}
         />
+        <Input
+          label="Confirmar senha"
+          type="password"
+          placeholder="Confirme sua senha"
+          {...register('confirmPassword')}
+          error={errors.confirmPassword}
+        />
 
         <div className="mt-4 flex flex-col gap-4">
-          <Link
-            className="text-info w-32 font-semibold transition-opacity hover:opacity-60"
-            href={''}
+          <button
+            className="text-info w-40 font-semibold transition-opacity hover:opacity-60"
+            onClick={() => handleSignIn('SignIn')}
           >
-            Criar nova conta
-          </Link>
+            Entrar com uma conta
+          </button>
         </div>
 
         <footer className='mt-4 flex justify-end gap-4'>
@@ -81,8 +107,8 @@ export function SignIn() {
               hover:bg-info/80
               hover:border-textLight
           '>
-            <PiSignInBold size={24} />
-            Entrar
+            <RiAccountPinCircleLine size={24} />
+            Confirmar
           </Button>
         </footer>
       </form>
