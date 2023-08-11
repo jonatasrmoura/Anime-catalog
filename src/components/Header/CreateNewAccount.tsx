@@ -1,6 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Dialog from "@radix-ui/react-dialog";
+import Swal from "sweetalert2";
 import { RiAccountPinCircleLine } from "react-icons/ri";
 
 import { Input } from "../Input";
@@ -33,6 +34,13 @@ export function CreateNewAccount({ handleSignIn }: ICreateNewAccountProps) {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     console.log(values);
     reset();
+    Swal.fire({
+      icon: 'success',
+      title: 'Nova conta criada com sucesso!',
+      text: `Bem-vindo(a) ${values.fullname} 🥰`,
+      showConfirmButton: false,
+      timer: 3000
+    });
   }
 
   return (
