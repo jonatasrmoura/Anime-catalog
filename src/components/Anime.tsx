@@ -9,33 +9,31 @@ interface IAnimeProps {
 
 export function Anime({ name, description, image }: IAnimeProps) {
   return (
-    <Link 
-      href={''}
-      className="border border-black rounded shadow-md"
-    >
-      <Image
-        className="h-80"
-        src={image}
-        alt={name}
-        width={1000}
-        height={250}
-        unoptimized
-      />
-      <div className="
-        h-32
-        lg:h-48
-        grid
-        grid-cols-1
-        gap-2
-        py-5
-        border-t
-        p-1
-        border-secound
-        bg-secound
-      ">
-        <h4>{name}</h4>
-        <p>{description}</p>
-      </div>
-    </Link>
+    <div className="border border-black rounded shadow-md my-5">
+      <Link 
+        href={''}
+      >
+        <Image
+          className="h-72"
+          src={image}
+          alt={name}
+          width={1000}
+          height={300}
+          unoptimized
+        />
+      </Link>
+        <div className="
+          h-32
+          lg:h-60
+          xl:h-48
+          border-t
+          pl-2
+          border-secound
+          bg-secound
+        ">
+          <h4 className="text-lg font-bold py-3">{name}</h4>
+          <p>{description}</p>
+        </div>
+    </div>
   );
 }
