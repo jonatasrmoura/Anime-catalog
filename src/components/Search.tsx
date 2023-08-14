@@ -24,7 +24,6 @@ export function Search({ label, value, onChange }: InputProps) {
           ☯
         </div>
         <input
-          type="search"
           id="voice-search"
           className="
             h-12
@@ -38,7 +37,8 @@ export function Search({ label, value, onChange }: InputProps) {
             focus:border-blue-500 
             block w-full
             pl-10 
-            p-2.5  
+            p-2.5
+            placeholder:text-gray-400 
             dark:bg-gray-700 
             dark:border-gray-600 
             dark:placeholder-gray-400 
@@ -47,6 +47,7 @@ export function Search({ label, value, onChange }: InputProps) {
             dark:focus:border-blue-500
           "
           required
+          placeholder="Digite o anime"
           value={displayValue}
           onChange={handleChange}
         />
