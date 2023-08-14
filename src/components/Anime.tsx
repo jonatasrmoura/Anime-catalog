@@ -14,14 +14,16 @@ export function Anime({ name, description, image }: IAnimeProps) {
       className="border border-black rounded shadow-md"
     >
       <Image
+        className="h-80"
         src={image}
         alt={name}
         width={1000}
-        height={150}
+        height={250}
         unoptimized
       />
       <div className="
         h-32
+        lg:h-48
         grid
         grid-cols-1
         gap-2

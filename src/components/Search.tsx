@@ -1,15 +1,30 @@
+import { ChangeEvent, InputHTMLAttributes, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 
-export function Search() {
+import { useDebounce } from '@/hooks/useDebounce';
+
+interface InputProps extends InputHTMLAttributes<HTMLElement> {
+  label: string;
+};
+
+export function Search({ label, value, onChange }: InputProps) {
+  const [displayValue, setDisplayValue] = useState(value);
+  const debouncedChange = useDebounce(onChange, 800);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setDisplayValue(event.target.value);
+    debouncedChange(event.target.value);
+  }
+
   return (
     <form className="w-full flex items-center">   
-      <label htmlFor="voice-search" className="sr-only">Search</label>
+      <label htmlFor="voice-search" className="sr-only">{label}</label>
       <div className="relative w-full">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500 dark:text-gray-400">
           ☯
         </div>
         <input
-          type="text"
+          type="search"
           id="voice-search"
           className="
             h-12
@@ -31,8 +46,9 @@ export function Search() {
             dark:focus:ring-blue-500 
             dark:focus:border-blue-500
           "
-          placeholder="Pesquisar"
           required
+          value={displayValue}
+          onChange={handleChange}
         />
         <div className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 dark:text-gray-400">
           <AiOutlineSearch />

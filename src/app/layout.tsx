@@ -2,6 +2,7 @@ import '../styles/globals.css';
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 
+import { AuthProvider } from '@/contexts/AnimesContext';
 import { Header } from '@/components/Header';
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['100', '400', '700'] });
@@ -29,10 +30,12 @@ export default function RootLayout({
           px-6
         `}
       >
-        <Header />
-        <section className="bg-primary rounded h-[85vh] overflow-y-scroll">
-          {children}
-        </section>
+        <AuthProvider>
+          <Header />
+          <section className="bg-primary rounded h-[85vh] overflow-y-scroll">
+            {children}
+          </section>
+        </AuthProvider>
       </body>
     </html>
   );

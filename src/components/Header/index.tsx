@@ -7,10 +7,12 @@ import { Search } from "../Search";
 import { lolisPhoto } from "@/utils/lolisPhoto";
 import { SignIn } from "./SignIn";
 import { CreateNewAccount } from "./CreateNewAccount";
+import { useAnimes } from "@/contexts/AnimesContext";
 
 export type IChooseHeaderModal = 'SignIn' | 'CreateNewAccount';
 
 export function Header() {
+  const { text, setText } = useAnimes();
   const [chooseHeaderModal, setChooseHeaderModal] = useState<IChooseHeaderModal>('SignIn');
 
   const profilePhoto = useMemo(() => {
@@ -47,7 +49,11 @@ export function Header() {
       </Dialog.Root>
       
       <div className="m-auto w-[75%] md:m-0 md:w-1/3">
-        <Search />
+        <Search
+          label="Pesquisar anime"
+          value={text}
+          onChange={search => setText(search as any)}
+        />
       </div>
     </header>
   );
