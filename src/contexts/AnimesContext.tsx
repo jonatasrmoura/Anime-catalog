@@ -1,6 +1,6 @@
 "use client";
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 import { api } from "@/services/api";
 
@@ -67,17 +67,17 @@ export function AuthProvider({ children }: AnimeProviderProps) {
   const [info, setInfo] = useState<IAnime>({} as IAnime);
   const [text, setText] = useState('');
 
-  const router = useRouter();
+  // const router = useRouter();
 
   useEffect(() => {
     if (text) {
       api.get(`/anime?filter[text]=${text}&page[limit]=15`)
       .then(({ data }) => {
-        router.push('#Initial');
+        // router.push('#Initial');
         setInfo(data);
       });
     }
-  }, [text, router]);
+  }, [text]);
 
   return (
     <AnimeContext.Provider value={{ info, text, setText }}>
