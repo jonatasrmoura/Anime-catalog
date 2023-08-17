@@ -73,8 +73,8 @@ export function AuthProvider({ children }: AnimeProviderProps) {
     if (text) {
       api.get(`/anime?filter[text]=${text}&page[limit]=15`)
       .then(({ data }) => {
-        setInfo(data);
         router.push('#Initial');
+        setInfo(data);
       });
     }
   }, [text, router]);
