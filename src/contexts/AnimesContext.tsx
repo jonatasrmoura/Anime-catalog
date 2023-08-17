@@ -70,11 +70,13 @@ export function AuthProvider({ children }: AnimeProviderProps) {
   const router = useRouter();
 
   useEffect(() => {
-    api.get(text ? `/anime?filter[text]=${text}&page[limit]=15` : `/anime?page[limit]=15`)
-    .then(({ data }) => {
-      setInfo(data);
-      router.push('#Initial');
-    });
+    if (text) {
+      api.get(`/anime?filter[text]=${text}&page[limit]=15`)
+      .then(({ data }) => {
+        setInfo(data);
+        router.push('#Initial');
+      });
+    }
   }, [text, router]);
 
   return (
