@@ -10,10 +10,12 @@ type ILinkData = {
   }
 };
 
-type IDataAnime = [{
+export type IDataAnime = {
   attributes: {
     canonicalTitle: string;
     description: string;
+    showType: string;
+    subtype: string;
     episodeCount: number;
     synopsis: string;
     youtubeVideoId: string;
@@ -24,6 +26,11 @@ type IDataAnime = [{
       original: string;
       small: string;
       tiny: string;
+    }
+    titles: {
+      en: string;
+      en_jp: string;
+      ja_jp: string;
     }
   };
   id: string;
@@ -38,10 +45,10 @@ type IDataAnime = [{
     staff: ILinkData;
   };
   type: string;
-}];
+};
 
-type IAnime = {
-  data: IDataAnime;
+type IAnimes = {
+  data: [IDataAnime];
   links: {
     first: string;
     last: string;
@@ -51,7 +58,7 @@ type IAnime = {
 };
 
 type AnimeContextData = {
-  info: IAnime;
+  info: IAnimes;
   text: string;
   setText: Dispatch<SetStateAction<string>>;
 };
@@ -63,12 +70,12 @@ type AnimeProviderProps = {
 export const AnimeContext = createContext({} as AnimeContextData);
 
 export function AuthProvider({ children }: AnimeProviderProps) {
-  const [info, setInfo] = useState<IAnime>({} as IAnime);
+  const [info, setInfo] = useState<IAnimes>({} as IAnimes);
   const [text, setText] = useState('');
 
   useEffect(() => {
     if (text) {
-      api.get<IAnime>(`/anime?filter[text]=${text}&page[limit]=15`)
+      api.get<IAnimes>(`/anime?filter[text]=${text}&page[limit]=15`)
       .then(({ data }) => {
         setInfo(data);
       });

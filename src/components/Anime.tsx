@@ -5,13 +5,14 @@ interface IAnimeProps {
   name: string;
   description: string;
   image: string;
+  link: string;
 }
 
-export function Anime({ name, description, image }: IAnimeProps) {
+export function Anime({ name, description, image, link }: IAnimeProps) {
   return (
     <div className="border border-black rounded shadow-md my-5">
       <Link 
-        href={''}
+        href={link}
       >
         <Image
           className="h-72"

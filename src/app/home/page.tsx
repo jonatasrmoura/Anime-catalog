@@ -19,6 +19,7 @@ export default function Page() {
             info.data.map((anime) => (
               <Anime
                 key={anime.id}
+                link={`/anime/${anime.id}`}
                 image={anime.attributes.posterImage.small}
                 name={anime.attributes.canonicalTitle}
                 description={`${anime.attributes.description.substring(0, 80)}...`}
@@ -27,16 +28,6 @@ export default function Page() {
           )}
         </CardAnime>
       </ContainerCard>
-
-      {/* <ContainerCard title="Novidades" colorLine="bg-violet-600">
-        <CardAnime>
-          <Anime
-            image='https://vocesabianime.com/wp-content/uploads/2020/03/Nanatsu-no-taizai-1000x701.jpg'
-            name="Nanatsu no Taizai"
-            description="Os sete pecados capitais iram enfrentar o rei dos demonios"
-          />
-        </CardAnime>
-      </ContainerCard> */}
     </>
   );
 }
