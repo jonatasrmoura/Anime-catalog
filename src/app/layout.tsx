@@ -32,9 +32,9 @@ export default function RootLayout({
       >
         <AuthProvider>
           <Header />
-          <section id="scroll-element" className="bg-primary rounded pt-20">
+          <>
             {children}
-          </section>
+          </>
         </AuthProvider>
       </body>
     </html>

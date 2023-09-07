@@ -41,11 +41,11 @@ export default function Page({ params }: IPageProps) {
     .then(response => setAnime(response.data));
   }, [params.id]);
 
-  return (
-    <main className="mb-5">
+  return ( 
+    <main className="h-screen overflow-y-scroll">
       {anime ? (
         <ContainerCard title={anime.data.attributes.canonicalTitle} colorLine={'bg-violet-600'}>
-          <div className="max-w-lg flex flex-col gap-6 m-auto">
+          <div className="max-w-lg flex flex-col gap-6 m-auto mt-32">
             <Image
               className="h-72 w-72  m-auto rounded-full border-2 border-info"
               src={anime.data.attributes.posterImage.original}

@@ -35,7 +35,7 @@ export function Header() {
       justify-between
       items-center
       border-b-2
-      rounded-lg
+      rounded-b-lg
       border-info
       bg-background
     ">
