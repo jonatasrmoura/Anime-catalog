@@ -9,7 +9,7 @@ interface InputProps extends InputHTMLAttributes<HTMLElement> {
 
 export function Search({ label, value, onChange }: InputProps) {
   const [displayValue, setDisplayValue] = useState(value);
-  const debouncedChange = useDebounce(onChange, 800);
+  const debouncedChange = useDebounce(onChange, 1500);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setDisplayValue(event.target.value);

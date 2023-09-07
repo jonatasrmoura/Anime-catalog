@@ -74,14 +74,9 @@ export function AuthProvider({ children }: AnimeProviderProps) {
   const [page, setPage] = useState(0);
 
   const loadMoreItems = () => {
-    let url = '';
-
-    if (text) {
-      setAnimes([]);
-      url = `/anime?filter[text]=${text}&page[limit]=15`;
-    } else {
-      url = `/anime?page[limit]=15&page[offset]=${page}`;
-    }
+    // if (text) {
+    //   setUrl(`/anime?filter[text]=${text}&page[limit]=15&page[offset]=${page}`);
+    // }
 
     api.get<IAnimes>(`/anime?page[limit]=15&page[offset]=${page}`)
     .then(({ data: anime }) => {
