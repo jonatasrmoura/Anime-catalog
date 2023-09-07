@@ -27,10 +27,17 @@ export function Header() {
   return (
     <header className="
       h-[15vh]
+      w-[97.5%]
       px-4
+      fixed
+      z-50
       flex
       justify-between
       items-center
+      border-b-2
+      rounded-lg
+      border-info
+      bg-background
     ">
       {pathName !== '/home' ? (
         <button type="button" onClick={router.back} className="transition-opacity hover:opacity-70">

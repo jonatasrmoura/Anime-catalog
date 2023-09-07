@@ -1,9 +1,7 @@
 "use client";
-import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useMemo, useState } from "react";
 
-import { api } from "@/services/api";
-
-type ILinkData = {
+export type ILinkData = {
   links: {
     related: string;
     self: string;
@@ -47,8 +45,8 @@ export type IDataAnime = {
   type: string;
 };
 
-type IAnimes = {
-  data: [IDataAnime];
+export type IAnimes = {
+  data: IDataAnime[];
   links: {
     first: string;
     last: string;
@@ -57,8 +55,7 @@ type IAnimes = {
   meta: { count: number };
 };
 
-type AnimeContextData = {
-  info: IAnimes;
+export type AnimeContextData = {
   text: string;
   setText: Dispatch<SetStateAction<string>>;
 };
@@ -70,20 +67,15 @@ type AnimeProviderProps = {
 export const AnimeContext = createContext({} as AnimeContextData);
 
 export function AuthProvider({ children }: AnimeProviderProps) {
-  const [info, setInfo] = useState<IAnimes>({} as IAnimes);
   const [text, setText] = useState('');
 
-  useEffect(() => {
-    if (text) {
-      api.get<IAnimes>(`/anime?filter[text]=${text}&page[limit]=15`)
-      .then(({ data }) => {
-        setInfo(data);
-      });
-    }
-  }, [text]);
+  const values = useMemo(() => ({
+    text,
+    setText,
+  }), [text]);
 
   return (
-    <AnimeContext.Provider value={{ info, text, setText }}>
+    <AnimeContext.Provider value={values}>
       {children}
     </AnimeContext.Provider>
   );
