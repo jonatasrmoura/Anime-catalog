@@ -2,16 +2,19 @@ import { ChangeEvent, InputHTMLAttributes, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 
 import { useDebounce } from '@/hooks/useDebounce';
+import { useAnimes } from '@/contexts/AnimesContext';
 
 interface InputProps extends InputHTMLAttributes<HTMLElement> {
   label: string;
 };
 
 export function Search({ label, value, onChange }: InputProps) {
+  const { setIsLoading } = useAnimes();
   const [displayValue, setDisplayValue] = useState(value);
   const debouncedChange = useDebounce(onChange, 1500);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setIsLoading(true);
     setDisplayValue(event.target.value);
     debouncedChange(event.target.value);
   }

@@ -1,6 +1,15 @@
 "use client";
 import { api } from "@/services/api";
-import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useMemo, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from "react";
 
 export type ILinkData = {
   links: {
@@ -60,6 +69,7 @@ export type AnimeContextData = {
   text: string;
   setText: Dispatch<SetStateAction<string>>;
   animes: IDataAnime[];
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
 };
 
 type AnimeProviderProps = {
@@ -72,24 +82,33 @@ export function AuthProvider({ children }: AnimeProviderProps) {
   const [text, setText] = useState('');
   const [animes, setAnimes] = useState<IDataAnime[]>([]);
   const [page, setPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const loadMoreItems = () => {
-    // if (text) {
-    //   setUrl(`/anime?filter[text]=${text}&page[limit]=15&page[offset]=${page}`);
-    // }
-
-    api.get<IAnimes>(`/anime?page[limit]=15&page[offset]=${page}`)
-    .then(({ data: anime }) => {
-      setAnimes(prevAnimes => {
-        return [...prevAnimes, ...anime.data];
+    setIsLoading(false);
+    if (text) {
+      isLoading && setAnimes([]);
+      api.get<IAnimes>(`/anime?filter[text]=${text}&page[limit]=15&page[offset]=${page}`)
+      .then(({ data: anime }) => {
+        setAnimes(prevAnimes => {
+          return [...prevAnimes, ...anime.data];
+        });
+        setPage(page + 1);
       });
-      setPage(page + 1);
-    });
+    } else {
+      api.get<IAnimes>(`/anime?page[limit]=15&page[offset]=${page}`)
+      .then(({ data: anime }) => {
+        setAnimes(prevAnimes => {
+          return [...prevAnimes, ...anime.data];
+        });
+        setPage(page + 1);
+      });
+    }
   };
 
   useEffect(() => {
     loadMoreItems(); // Carregue os primeiros itens
-  }, []);
+  }, [text]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -110,7 +129,8 @@ export function AuthProvider({ children }: AnimeProviderProps) {
   const values = useMemo(() => ({
     text,
     setText,
-    animes
+    animes,
+    setIsLoading
   }), [text, animes]);
 
   return (
