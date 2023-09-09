@@ -17,7 +17,7 @@ export default function Page() {
   return (
     <>
       {animes.length >= 1 ? (
-        <section className="bg-primary rounded pt-20">
+        <section className="bg-primary rounded pt-36">
           <ContainerCard
             title={animeCard.title}
             colorLine={animeCard.colorLine}
