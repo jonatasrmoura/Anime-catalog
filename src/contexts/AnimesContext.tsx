@@ -85,25 +85,22 @@ export function AuthProvider({ children }: AnimeProviderProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const loadMoreItems = () => {
-    setIsLoading(false);
-    if (text) {
-      isLoading && setAnimes([]);
-      api.get<IAnimes>(`/anime?filter[text]=${text}&page[limit]=15&page[offset]=${page}`)
-      .then(({ data: anime }) => {
-        setAnimes(prevAnimes => {
-          return [...prevAnimes, ...anime.data];
-        });
-        setPage(page + 1);
-      });
-    } else {
-      api.get<IAnimes>(`/anime?page[limit]=15&page[offset]=${page}`)
-      .then(({ data: anime }) => {
-        setAnimes(prevAnimes => {
-          return [...prevAnimes, ...anime.data];
-        });
-        setPage(page + 1);
-      });
+    const URL_API = text ? `/anime?filter[text]=${text}&page[limit]=15&page[offset]=${page}`
+      : `/anime?page[limit]=15&page[offset]=${page}`;
+
+    if (isLoading) {
+      setAnimes([]);
+      setPage(0);
+      setIsLoading(false);
     }
+
+    api.get<IAnimes>(URL_API)
+    .then(({ data: anime }) => {
+      setAnimes(prevAnimes => {
+        return [...prevAnimes, ...anime.data];
+      });
+      setPage(page + 1);
+    });
   };
 
   useEffect(() => {
